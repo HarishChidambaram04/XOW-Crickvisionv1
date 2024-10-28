@@ -1,0 +1,157 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="theme-color" content="#007bff" />
+        <link href="https://api.fontshare.com/v2/css?f[]=amulya@400&display=swap" rel="stylesheet">
+        <title>Crickvision - PunchBiz</title>
+        <link href="https://fonts.googleapis.com/css?family=Gantari:400,600,700&display=swap" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/scroll.js' %}"></script>
+    </head>
+
+    <body class="authen">
+        <div class="hero_area bubbly">
+            <header class="header_section">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg custom_nav-container ">
+                        <a class="navbar-brand" href="">
+                            <img src="https://crickvision.github.io/d/i/logo.png" class="logo-image">
+
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fa-solid fa-bars fa-xl"></i>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+                                <ul class="navbar-nav  ">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/">Home </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/contact"> Contact </a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="/login">Login<span class="sr-only">(current)</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <section class=" slider_section ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="formy">
+                                {% if page == "signup" %}
+                                <div class="signup" id="signup">
+                                    <form method="post" action="/signupvalidate/">
+                                        {% csrf_token %}
+                                        <div class="formfield">
+                                            <h1 class="blue-clr">Signup</h1>
+                                        </div>
+                                        <div class="formfield">
+                                            <input type="text" placeholder="Name" id="username" name="name">
+                                        </div>
+                                        <div class="formfield">
+                                            <input type="text" placeholder="Email" id="username" name="email">
+                                        </div>
+                                        <div class="formfield">
+                                            <input type="password" placeholder="Password" class="pwip" id="password"
+                                                name="pass">
+                                            <i name="ixx" class="fa-solid fa-eye" onclick="showPass('pass')"></i>
+                                        </div>
+                                        <div class="formfield">
+                                            <button type="submit">Signup</button>
+                                        </div>
+                                        <div class="formfield">
+                                            Already an user?<a class="signup-btn blue-clr" href="/signin/">Signin</a>
+                                            here
+                                        </div>
+                                    </form>
+                                </div>
+                                {% elif page == "signin" %}
+                                <div class="signin" id="signin">
+                                    <form action="/upload/" method="post">
+                                        {% csrf_token %}
+                                        <div class="formfield">
+                                            <h1 class="blue-clr">Signin</h1>
+                                        </div>
+                                        <div class="formfield">
+                                            <input type="text" placeholder="Email" id="username" name="emailx">
+                                        </div>
+                                        <div class="formfield">
+                                            <input type="password" placeholder="Password" class="pwip" id="password"
+                                                name="passx">
+
+                                            <svg fill="#007bff" height="40px" width="40px" onclick="showPass('passx')"
+                                                version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 488.85 488.85"
+                                                xml:space="preserve">
+                                                <g>
+                                                    <path d="M244.425,98.725c-93.4,0-178.1,51.1-240.6,134.1c-5.1,6.8-5.1,16.3,0,23.1c62.5,83.1,147.2,134.2,240.6,134.2
+		s178.1-51.1,240.6-134.1c5.1-6.8,5.1-16.3,0-23.1C422.525,149.825,337.825,98.725,244.425,98.725z M251.125,347.025
+		c-62,3.9-113.2-47.2-109.3-109.3c3.2-51.2,44.7-92.7,95.9-95.9c62-3.9,113.2,47.2,109.3,109.3
+		C343.725,302.225,302.225,343.725,251.125,347.025z M248.025,299.625c-33.4,2.1-61-25.4-58.8-58.8c1.7-27.6,24.1-49.9,51.7-51.7
+		c33.4-2.1,61,25.4,58.8,58.8C297.925,275.625,275.525,297.925,248.025,299.625z" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="formfield">
+                                            <button type="submit">Log In</button>
+                                        </div>
+                                        <div class="formfield forgot-pass">
+                                            <a class="signup-btn blue-clr" href="/forgotpassword/">Forgot password?</a>
+                                        </div>
+                                        <div class="formfield">
+                                            New here? <a class="signup-btn blue-clr" href="/signup/">Signup</a> here
+                                        </div>
+                                    </form>
+                                </div>
+                                {% else %}
+                                <div class="forgot">
+                                    <form action="/forgotpass/" method="post">
+                                        {% csrf_token %}
+                                        <div class="formfield">
+                                            <h1 class="blue-clr">Reset Password</h1>
+                                        </div>
+                                        <div class="formfield">
+                                            <input type="text" placeholder="Email" id="username" name="emailf">
+                                        </div>
+                                        <div class="formfield">
+                                            <button type="submit">Send Email</button>
+                                        </div>
+                                        <div class="formfield">
+                                            Back to<a class="signup-btn blue-clr" href="/signin/"> Signin</a>
+                                        </div>
+                                    </form>
+                                </div>
+                                {% endif %}
+                                {% if msg %}
+                                <div class="formfieldx">
+                                    <p class="error">{{ msg }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6 offset-lg-1">
+                            <img src="https://crickvision.github.io/d/i/Cricket.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="theme-color" content="#007bff" />
+        <title>Crickvision - PunchBiz</title>
+        <script src="https://kit.fontawesome.com/1f91ac7656.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Gantari:400,600,700&display=swap" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+        <script src="{% static 'js/scroll.js' %}"></script>
+    </head>
+
+    <body class="admin">
+        <div class="hero_area bubbly">
+            <header class="header_section">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg custom_nav-container ">
+                        <a class="navbar-brand" href="">
+                            <img src="https://crickvision.github.io/d/i/logo.png" class="logo-image">
+                        </a>
+                        <span id="dev">DEVELOPER</span>
+                        <ul class="navbar-nav  ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <section class=" slider_section ">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="reqmar">
+                                <div class="heading">
+                                    <h1>
+                                        Hiii {{namex}}! ,
+                                    </h1>
+                                    <h2><u>Requests:</u></h2>
+
+                                </div>
+                                <div class="request">
+                                    {% for item1, item2, item3,item4,item5 in zipped_lists %}
+
+                                    <div class="userdiv">
+                                        <div class="lcont">
+                                            <h1>{{ item1 }}</h1>
+
+                                            <h3><a href="mailto:{{item2}}">{{ item2 }}</a></h3>
+
+                                            <p>{{ item3 }}</p>
+                                        </div>
+                                        <div class="rcont">
+                                            <p>Pending Requests: {{item4}}</p>
+                                            <div class="fields">
+                                                <input type="text" value="{{item5}}" class="vUrl" id="{{ item3 }}" />
+                                                <button class="copy" onclick="copyUrl('{{item3}}')"><i
+                                                        class="fa-regular fa-copy"></i></button>
+
+                                            </div>
+                                            <button class="submitobs"
+                                                onclick="showpop('{{ item3 }}','{{ item1 }}','{{item2}}')">Submit
+                                                Observation</button>
+
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="observation" id="observation">
+                <div class="obs-top-bar"> Upload your Observation<button onclick="closePrompy()"><i
+                            class="fa-solid fa-xmark"></i></button></div>
+                <div class="contx">
+                    <label for="">User Id:</label>
+                    <input type="text" name="" id="obsuid" readonly>
+                    <label for="">User Name:</label>
+                    <input type="text" name="" id="obsuname" readonly>
+                    <label for="">User Email:</label>
+                    <input type="text" name="" id="obsumail" readonly>
+                    <div class="imgvid">
+                        <div class="vidside">
+                            <label for="">Observation Video:</label>
+                            <div class="domer">
+                                <p class="hixx" id="updng">
+                                    Continue by Uploading a video.
+                                </p>
+                                <div class="progress rounded-pill" id="prog">
+                                    <div role="progressbar" aria-valuenow="55" aria-valuemin="0" id="inval"
+                                        aria-valuemax="100" class="progress-bar rounded-pill"></div>
+                                </div>
+                                <div class="fileview">
+
+                                    <input type="file" id="videoFile" required accept="video/*"
+                                        onchange="showButton()" />
+                                    <button class="nones" id="upx" type="submit" onclick="uploadVideo()">Proceed <i
+                                            class="fa fa-circle-arrow-right" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+
+
+                            <label for="">Video URL:</label>
+                            <input type="text" name="" id="subUrl" readonly>
+                        </div>
+
+                        <div class="imgside">
+                            <label for="">BB Effect Images: </label>
+                            <div class="domer">
+                                <p class="hixx" id="iupdng">
+                                    Continue by Uploading multiple images.
+                                </p>
+                                <div class="progress rounded-pill" id="iprog">
+                                    <div role="progressbar" aria-valuenow="55" aria-valuemin="0" id="iinval"
+                                        aria-valuemax="100" class="progress-bar rounded-pill"></div>
+                                </div>
+                                <div class="fileview">
+
+                                    <input type="file" id="imgFile" required accept="image/*" multiple
+                                        onchange="showiButton()" />
+                                    <button class="nones" id="iupx" type="submit" onclick="uploadImage()">Proceed <i
+                                            class="fa fa-circle-arrow-right" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                            <label for="">BB EffectImage Urls:</label>
+                            <input type="text" name="" id="isubUrl" readonly>
+                        </div>
+
+                    </div>
+                    <div class="imgvid">
+
+                        <div class="vidside">
+                            <label for="">Dot Visualization Images: </label>
+                            <div class="domer">
+                                <p class="hixx" id="iupdng2">
+                                    Continue by Uploading multiple images.
+                                </p>
+                                <div class="progress rounded-pill" id="iprog2">
+                                    <div role="progressbar" aria-valuenow="55" aria-valuemin="0" id="iinval2"
+                                        aria-valuemax="100" class="progress-bar rounded-pill"></div>
+                                </div>
+                                <div class="fileview">
+
+                                    <input type="file" id="imgFile2" required accept="image/*" multiple
+                                        onchange="showi2Button()" />
+                                    <button class="nones" id="iupx2" type="submit" onclick="uploadImage2()">Proceed <i
+                                            class="fa fa-circle-arrow-right" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                            <label for=""> Dot Visualization Image Urls:</label>
+                            <input type="text" name="" id="isubUrl2" readonly>
+                        </div>
+
+                        <div class="imgside">
+                            <label for="">Ball Trajectory Images: </label>
+                            <div class="domer">
+                                <p class="hixx" id="iupdng3">
+                                    Continue by Uploading multiple images.
+                                </p>
+                                <div class="progress rounded-pill" id="iprog3">
+                                    <div role="progressbar" aria-valuenow="55" aria-valuemin="0" id="iinval3"
+                                        aria-valuemax="100" class="progress-bar rounded-pill"></div>
+                                </div>
+                                <div class="fileview">
+
+                                    <input type="file" id="imgFile3" required accept="image/*" multiple
+                                        onchange="showi3Button()" />
+                                    <button class="nones" id="iupx3" type="submit" onclick="uploadImage3()">Proceed <i
+                                            class="fa fa-circle-arrow-right" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                            <label for=""> Ball Trajectory Image Urls:</label>
+                            <input type="text" name="" id="isubUrl3" readonly>
+                        </div>
+                    </div>
+                    <button class="submit-observation" onclick="submitForm()">Submit</button>
+                    <input type="text" id="bendfb" value="{{ fbdata }}" class="input-hidden">
+                    <form action="/reportSubmit/" method="post" id="vidform">
+                        {% csrf_token %}
+                        <input type="text" name="userid" id="obsuid2" class="input-hidden">
+                        <input type="text" name="videou" id="subUrl2" class="input-hidden">
+                        <input type="text" name="images1" id="isubUrl21" class="input-hidden">
+                        <input type="text" name="images2" id="isubUrl22" class="input-hidden">
+                        <input type="text" name="images3" id="isubUrl23" class="input-hidden">
+                        <input type="text" name="rName" id="obsuname2" class="input-hidden">
+                        <input type="text" name="rMail" id="obsumail2" class="input-hidden">
+                        <input type="text" value="{{namex}}" name="devname" id="obsuid2" class="input-hidden">
+                    </form>
+                </div>
+            </div>
+            {% if notif %}
+            <script>
+                alert('{{notif}}');
+            </script>
+            {% endif %}
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/admin.js' %}"></script>
+    </body>
+
+</html>
